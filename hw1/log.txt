@@ -1,8 +1,2 @@
 ivan_igorevich: Всем привет
 Test: И тебе привет
-ivan_igorevich: test
-ivan_igorevich: one more
-ivan: asfdasdfasf
-ivan: asdfasf
-ivan: hello
-igorevich: test

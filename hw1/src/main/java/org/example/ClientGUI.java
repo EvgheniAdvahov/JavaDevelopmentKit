@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.client.ClientList;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -87,8 +85,10 @@ public class ClientGUI extends JFrame {
         setResizable(false);
         setVisible(true);
 
-        ClientList.allClientList.add(this);
+//        ClientList.allClientList.add(this);
         getRootPane().setDefaultButton(btnSend);
+
+        serverWindow.addClientToList(this);
     }
 
 
@@ -107,4 +107,7 @@ public class ClientGUI extends JFrame {
         return authentificated;
     }
 
+    public void setAuth(boolean b) {
+        authentificated = b;
+    }
 }

@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.client.ClientList;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,17 +7,18 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerWindow extends JFrame {
 
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
-
     private final JPanel panelTop = new JPanel(new GridLayout(1, 2));
     private final JPanel panelBottom = new JPanel(new GridLayout(1, 2));
-
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
+    public List<ClientGUI> myListOfUsers = new ArrayList<>();
     private JTextArea log = new JTextArea();
     private boolean isServerWorking;
 
@@ -32,10 +31,11 @@ public class ServerWindow extends JFrame {
                 isServerWorking = false;
                 log.append("Сервер остановлен \n");
                 System.out.println("Server stopped " + isServerWorking + "\n");
-                for (ClientGUI clientGUI : ClientList.allClientList) {
-                    clientGUI.changeState();
-                }
 
+                for (ClientGUI user : myListOfUsers) {
+                    user.changeState();
+                    user.setAuth(false);
+                }
             }
         });
 
@@ -91,10 +91,14 @@ public class ServerWindow extends JFrame {
     }
 
     public void sendToAll(String s) {
-        for (ClientGUI clientGUI : ClientList.allClientList) {
-            if(clientGUI.isAuthentificated()){
-            clientGUI.addToTextArea(s);
+        for (ClientGUI user : myListOfUsers) {
+            if (user.isAuthentificated()) {
+                user.addToTextArea(s);
             }
         }
+    }
+
+    public void addClientToList(ClientGUI client) {
+        myListOfUsers.add(client);
     }
 }
