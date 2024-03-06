@@ -54,8 +54,8 @@ public class ClientGUI extends JFrame {
 
                 if (authentificated) {
                     serverWindow.writeToLog(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
-                    serverWindow.sendToAll(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
-                    serverWindow.addJTextLog(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                    serverWindow.sendToAll(tfLogin.getText() + ": " + tfMessage.getText() + "\n"); //make one method   ^
+                    serverWindow.addJTextLog(tfLogin.getText() + ": " + tfMessage.getText() + "\n"); //make one method |
                     tfMessage.setText(null);
                 }
             }
