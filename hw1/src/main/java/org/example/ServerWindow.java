@@ -12,19 +12,14 @@ public class ServerWindow extends JFrame {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
 
-    private final JPanel panelTop = new JPanel(new GridLayout(1,2));
-    private final JPanel panelBottom = new JPanel(new GridLayout(1,2));
+    private final JPanel panelTop = new JPanel(new GridLayout(1, 2));
+    private final JPanel panelBottom = new JPanel(new GridLayout(1, 2));
 
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
     private JTextArea log = new JTextArea();
     private boolean isServerWorking;
 
-
-
-    public boolean isServerWorking() {
-        return isServerWorking;
-    }
 
     public ServerWindow() {
         isServerWorking = false;
@@ -69,11 +64,14 @@ public class ServerWindow extends JFrame {
         add(panelBottom, BorderLayout.SOUTH);
 
 
-
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
 
+    }
+
+    public boolean isServerWorking() {
+        return isServerWorking;
     }
 
     public void addLog(String s) {

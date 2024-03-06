@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.*;
 
 public class ClientGUI extends JFrame {
@@ -48,7 +46,6 @@ public class ClientGUI extends JFrame {
                     } catch (IOException m) {
                         m.printStackTrace();
                     }
-
                 } else {
                     log.append("Подключение не удалось" + "\n");
                 }
@@ -60,40 +57,23 @@ public class ClientGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (authentificated) {
                     try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
-                        writer.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                        writer.append(tfLogin.getText()).append(": ").append(tfMessage.getText()).append("\n");
                     } catch (IOException m) {
                         m.printStackTrace();
                     }
 
                     for (ClientGUI clientGUI : ClientList.allClientList) {
-                        clientGUI.log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                        if (clientGUI.authentificated) {
+                            clientGUI.log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                        }
                     }
 
                     serverWindow.addLog(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+
                     tfMessage.setText(null);
                 }
             }
         });
-
-        btnSend.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.println("Enter in cmd");
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
-
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -120,7 +100,7 @@ public class ClientGUI extends JFrame {
         setVisible(true);
 
         ClientList.allClientList.add(this);
-
+        getRootPane().setDefaultButton(btnSend);
     }
 
     public void changeState() {
