@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ServerWindow extends JFrame {
 
@@ -74,7 +77,24 @@ public class ServerWindow extends JFrame {
         return isServerWorking;
     }
 
-    public void addLog(String s) {
+    public void addJTextLog(String s) {
         this.log.append(s);
+    }
+
+
+    public void writeToLog(String text) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+            writer.append(text);
+        } catch (IOException m) {
+            m.printStackTrace();
+        }
+    }
+
+    public void sendToAll(String s) {
+        for (ClientGUI clientGUI : ClientList.allClientList) {
+            if(clientGUI.isAuthentificated()){
+            clientGUI.addToTextArea(s);
+            }
+        }
     }
 }
