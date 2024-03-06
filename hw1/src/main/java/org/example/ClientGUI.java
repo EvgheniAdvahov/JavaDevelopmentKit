@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.*;
 
 public class ClientGUI extends JFrame {
 
@@ -34,12 +35,22 @@ public class ClientGUI extends JFrame {
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (serverWindow.isServerWorking() == true) {
+                if (serverWindow.isServerWorking()) {
                     authentificated = true;
                     log.append("Вы успешно подключились\n\n");
                     panelTop.setVisible(false);
+
+                    try (BufferedReader reader = new BufferedReader(new FileReader("log.txt"))) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            log.append(line + "\n");
+                        }
+                    } catch (IOException m) {
+                        m.printStackTrace();
+                    }
+
                 } else {
-                    log.append("Серер оффлайн" + "\n");
+                    log.append("Подключение не удалось" + "\n");
                 }
             }
         });
@@ -47,8 +58,20 @@ public class ClientGUI extends JFrame {
         btnSend.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                log.append(tfMessage.getText() + "\n");
-                tfMessage.setText(null);
+                if (authentificated) {
+                    try (BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true))) {
+                        writer.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                    } catch (IOException m) {
+                        m.printStackTrace();
+                    }
+
+                    for (ClientGUI clientGUI : ClientList.allClientList) {
+                        clientGUI.log.append(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                    }
+
+                    serverWindow.addLog(tfLogin.getText() + ": " + tfMessage.getText() + "\n");
+                    tfMessage.setText(null);
+                }
             }
         });
 
@@ -61,7 +84,7 @@ public class ClientGUI extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    System.out.println("yohoho");
+                    System.out.println("Enter in cmd");
                 }
             }
 
@@ -98,8 +121,6 @@ public class ClientGUI extends JFrame {
 
         ClientList.allClientList.add(this);
 
-
-        this.setFocusable(true);
     }
 
     public void changeState() {

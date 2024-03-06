@@ -17,7 +17,7 @@ public class ServerWindow extends JFrame {
 
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
-    private final JTextArea log = new JTextArea();
+    private JTextArea log = new JTextArea();
     private boolean isServerWorking;
 
 
@@ -68,9 +68,15 @@ public class ServerWindow extends JFrame {
         add(panelTop, BorderLayout.CENTER);
         add(panelBottom, BorderLayout.SOUTH);
 
+
+
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
 
+    }
+
+    public void addLog(String s) {
+        this.log.append(s);
     }
 }
