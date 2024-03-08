@@ -36,6 +36,7 @@ public class ServerWindow extends JFrame {
                     user.changeState();
                     user.setAuth(false);
                 }
+
             }
         });
 
