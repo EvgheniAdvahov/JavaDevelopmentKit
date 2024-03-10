@@ -72,8 +72,8 @@ public class ClientController {
         connected = false;
         clientView.disconnectedFromServer();
         clientView.showMessage("Вы были отключены от сервера!");
-//        почему не работает
-//        showOnWindow("Вы были отключены от сервера!");
+
+//        showOnWindowTest("Вы были отключены от сервера!", clientView );
     }
 
     /**
@@ -84,6 +84,10 @@ public class ClientController {
     private void showOnWindow(String text) {
         clientView.showMessage(text);
     }
+
+//    private void showOnWindowTest(String text, ClientView clientView) {
+//        clientView.showMessage(text);
+//    }
 
     /**
      * Метод отключения от сервера инициализированное клиентом (например закрыто GUI)
