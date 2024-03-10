@@ -49,7 +49,7 @@ public class ServerController {
 
 
     public void message(String text) {
-        if(!work){
+        if (!work) {
             return;
         }
         showOnWindow(text);

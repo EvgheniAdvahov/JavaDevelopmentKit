@@ -4,8 +4,10 @@ package org.example.client;
  * Интерфейс описывающий абстракцию GUI
  */
 public interface ClientView {
+
     /**
      * Метод для отображения сообщения в GUI
+     *
      * @param message текст сообщения
      */
     void showMessage(String message);

@@ -8,7 +8,8 @@ import java.awt.event.*;
  * Класс описывающий работу графического интерфейса приложения.
  * Является абстракцией GUI
  */
-public class ClientGUI extends JFrame implements ClientView{
+public class ClientGUI extends JFrame implements ClientView {
+
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
 
@@ -36,11 +37,13 @@ public class ClientGUI extends JFrame implements ClientView{
 
     /**
      * Это сеттер
+     *
      * @param clientController
      */
     public void setClient(ClientController clientController) {
         this.clientController = clientController;
     }
+
     /**
      * Настройка основных параметров GUI
      */
@@ -62,6 +65,7 @@ public class ClientGUI extends JFrame implements ClientView{
 
     /**
      * Метод создания панели авторизации
+     *
      * @return возвращает созданную панель
      */
     private Component createHeaderPanel() {
@@ -87,8 +91,10 @@ public class ClientGUI extends JFrame implements ClientView{
 
         return headerPanel;
     }
+
     /**
      * Метод создания центральной панели, на которой отображается история сообщений
+     *
      * @return возвращает созданную панель
      */
     private Component createLog() {
@@ -96,8 +102,10 @@ public class ClientGUI extends JFrame implements ClientView{
         log.setEditable(false);
         return new JScrollPane(log);
     }
+
     /**
      * Метод создания панели отправки сообщений
+     *
      * @return возвращает созданную панель
      */
     private Component createFooter() {
@@ -126,8 +134,8 @@ public class ClientGUI extends JFrame implements ClientView{
     /**
      * Метод, срабатывающий при нажатии кнопки авторизации
      */
-    public void login(){
-        if (clientController.connectToServer(this)){
+    public void login() {
+        if (clientController.connectToServer(this)) {
             headerPanel.setVisible(false);
         }
     }
@@ -135,13 +143,14 @@ public class ClientGUI extends JFrame implements ClientView{
     /**
      * Метод
      */
-    private void message(){
+    private void message() {
         clientController.message(tfLogin.getText() + ": " + tfMessage.getText());
         tfMessage.setText("");
     }
 
     /**
      * Метод вывода текста на экран GUI. Вызывается из контроллера
+     *
      * @param msg текст, который требуется отобразить на экране
      */
     @Override
@@ -156,29 +165,27 @@ public class ClientGUI extends JFrame implements ClientView{
     public void disconnectedFromServer() {
         hideHeaderPanel(true);
     }
-    /**
-     * Метод, описывающий отключение клиента от сервера со стороны клиента
-     */
-    public void disconnectFromServer(){
-//        clientController.disconnectFromServer();
-    }
+
+
     /**
      * Метод изменения видимости верхней панели экрана, на которой виджеты для авторизации (например кнопка логин)
+     *
      * @param visible true, если надо сделать панель видимой
      */
-    public void hideHeaderPanel(boolean visible){
+    public void hideHeaderPanel(boolean visible) {
         headerPanel.setVisible(visible);
     }
+
     /**
      * Метод срабатывающий при важных событиях связанных с графическим окном (например окно в фокусе)
-     * @param e  the window event
+     *
+     * @param e the window event
      */
     @Override
     protected void processWindowEvent(WindowEvent e) {
         super.processWindowEvent(e);
-        if (e.getID() == WindowEvent.WINDOW_CLOSING){
+        if (e.getID() == WindowEvent.WINDOW_CLOSING) {
             clientController.disconnectUserFromServer(this);
-//            this.disconnectedFromServer();
         }
     }
 

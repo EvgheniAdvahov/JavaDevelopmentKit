@@ -6,15 +6,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ServerGUI extends JFrame implements Repository {
+
     public static final int WIDTH = 400;
     public static final int HEIGHT = 300;
-    public static final String LOG_PATH = "src/server/log.txt";
 
     JButton btnStart, btnStop;
     JTextArea log;
 
     ServerController serverController;
-
 
 
     /**
@@ -55,13 +54,10 @@ public class ServerGUI extends JFrame implements Repository {
             }
         });
 
-
         panel.add(btnStart);
         panel.add(btnStop);
         return panel;
     }
-
-
 
     private void setting() {
         setSize(WIDTH, HEIGHT);
@@ -76,8 +72,6 @@ public class ServerGUI extends JFrame implements Repository {
         log.append((message + '\n'));
 
     }
-
-
 
 
 }

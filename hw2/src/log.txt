@@ -8,3 +8,5 @@ Kostya: О! какие люди!) Приветствую
 Test: я тут
 Ivan Ivanovich: Ты кто?
 Ivan Ivanovich: Auuuu
+Ivan Ivanovich: Hello
+Test2: hi
