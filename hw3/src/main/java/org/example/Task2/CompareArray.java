@@ -13,8 +13,8 @@ public class CompareArray<T> {
             return false;
         }
         int i = 0;
-        while (i < firstArray.length){
-            if(firstArray[i].getClass() != secondArray[i].getClass()){
+        while (i < firstArray.length) {
+            if (firstArray[i].getClass() != secondArray[i].getClass()) {
                 System.out.println("Разные");
                 return false;
             }
@@ -25,9 +25,9 @@ public class CompareArray<T> {
     }
 
     public static void main(String[] args) {
-        Number[] firstArray = {1f, 2, 3, 4};
+        Number[] firstArray = {1, 2, 3, 4};
         String[] secondArray = {"1", "2", "3", "4"};
-        String[] thirdArray = {"1", "2", "3", "4"};
+        Object[] thirdArray = {"1", "2", "3", "4"};
 
         CompareArray.compareArrays(firstArray, secondArray);
         CompareArray.compareArrays(secondArray, thirdArray);
