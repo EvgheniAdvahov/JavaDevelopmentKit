@@ -8,7 +8,7 @@ public class CompareArray<T> {
   содержать элементы одного типа по парно по индексам.
  */
 
-    public static <T extends Object> boolean compareArrays(T[] firstArray, T[] secondArray) {
+    public static <T> boolean compareArrays(T[] firstArray, T[] secondArray) {
         if (firstArray.length != secondArray.length) {
             return false;
         }
