@@ -15,6 +15,7 @@ public class TaskMap {
         System.out.println(map);
         System.out.println(findSmallestTelNumber(map));
         System.out.println(findNumberByName(map));
+        System.out.println(findNumberByName2(map));
 
     }
 
@@ -25,7 +26,7 @@ public class TaskMap {
         map.put("345", "Name3");
         map.put("567", "Name4");
         map.put("678", "Zame55");
-        map.put("789", "ame6");
+        map.put("789", "Ame6");
 
         return map;
     }
@@ -45,5 +46,9 @@ public class TaskMap {
             }
         }
         return temp + ": "+ key;
+    }
+
+    public static String findNumberByName2(Map<String, String> map){
+        return map.entrySet().stream().max((o1, o2) -> o1.getValue().compareTo(o2.getValue())).get().getKey();
     }
 }
