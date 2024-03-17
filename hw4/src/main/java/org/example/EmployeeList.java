@@ -9,7 +9,7 @@ public class EmployeeList {
 
 
 
-    protected static List<Employee> findByExperience(Integer employeeExp){
+    protected  List<Employee> findByExperience(Integer employeeExp){
         List<Employee> listByExperience = new ArrayList<>();
         for (Employee employee : employeeList) {
             if(employee.getExperience().equals(employeeExp)){
@@ -20,7 +20,7 @@ public class EmployeeList {
     }
 
 
-    protected static List<Employee> findPhoneByName(String name){
+    protected List<Employee> findPhoneByName(String name){
         List<Employee> listPhoneByName = new ArrayList<>();
         for (Employee employee : employeeList) {
             if(employee.getName().equals(name)){
@@ -29,7 +29,7 @@ public class EmployeeList {
         }
         return listPhoneByName;
     }
-    protected static HashMap<Integer, String> findPhoneByNameMap(String name){
+    protected HashMap<Integer, String> findPhoneByNameMap(String name){
         HashMap<Integer, String> phoneMapByName = new HashMap<>();
         for (Employee employee : employeeList) {
             if(employee.getName().equals(name)){
@@ -39,7 +39,7 @@ public class EmployeeList {
         return phoneMapByName;
     }
 
-    protected static List<Employee> findEmployeeByPersonalNumber(Integer personalNumber){
+    protected List<Employee> findEmployeeByPersonalNumber(Integer personalNumber){
         List<Employee> employeesListByPersonalNumber = new ArrayList<>();
         for (Employee employee : employeeList) {
             if (employee.getPersonalNumber().equals(personalNumber)){
@@ -49,7 +49,7 @@ public class EmployeeList {
         return employeesListByPersonalNumber;
     }
 
-    protected static void addToEmployeeList(
+    protected void addToEmployeeList(
             Integer personalNumber
             ,Integer phoneNumber
             ,String name
