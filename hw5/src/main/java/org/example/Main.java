@@ -13,17 +13,19 @@ public class Main {
         Fork fork4 = new Fork("4");
         Fork fork5 = new Fork("5");
 
-        Philosoph philosoph1 = new Philosoph("Philosopher N1", fork1, fork5);
-        Philosoph philosoph2 = new Philosoph("Philosopher N2", fork2, fork1);
-        Philosoph philosoph3 = new Philosoph("Philosopher N3", fork3, fork2);
-        Philosoph philosoph4 = new Philosoph("Philosopher N4", fork4, fork3);
-        Philosoph philosoph5 = new Philosoph("Philosopher N5", fork5, fork4);
+        Philosoph philosoph1 = new Philosoph("Философ N1", fork1, fork5);
+        Philosoph philosoph2 = new Philosoph("Философ N2", fork2, fork1);
+        Philosoph philosoph3 = new Philosoph("Философ N3", fork3, fork2);
+        Philosoph philosoph4 = new Philosoph("Философ N4", fork4, fork3);
+        Philosoph philosoph5 = new Philosoph("Философ N5", fork5, fork4);
+
 
             philosoph1.start();
             philosoph2.start();
             philosoph3.start();
             philosoph4.start();
             philosoph5.start();
+
 
 
 
