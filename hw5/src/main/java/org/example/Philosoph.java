@@ -1,6 +1,10 @@
 package org.example;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Philosoph extends Thread {
+
+    CountDownLatch cdl = new CountDownLatch(55);
 
     Fork leftFork;
     Fork rightFork;
@@ -13,27 +17,44 @@ public class Philosoph extends Thread {
         this.rightFork = rightFork;
     }
 
-    public void think() {
-        System.out.println("Thinking " + name);
-    }
-
-    public void eat() {
-        if (!leftFork.isInUse() && !rightFork.isInUse()) {
-            System.out.println("leftFork.isInUse() = " + leftFork.isInUse());
-            System.out.println("rightFork.isInUse() = " + rightFork.isInUse());
-            synchronized (leftFork) {
-                System.out.println(name + "took " + leftFork.getForkName());
-                synchronized (rightFork) {
-                    System.out.println(name + "took " + rightFork.getForkName());
-                }
+    public void think() throws InterruptedException {
+        synchronized (leftFork) {
+            synchronized (rightFork) {
+                System.out.println("Думает " + name + ": при этом вернул вилки: " + leftFork.getForkName() + " и " + rightFork.getForkName());
+                Thread.sleep(10);
+                leftFork.setInUse(false);
+                rightFork.setInUse(false);
+                cdl.countDown();
             }
         }
-        System.out.println("Eating " + name + " " + leftFork.isInUse() + " " + rightFork.isInUse());
+    }
+
+    public  void  eat() throws InterruptedException {
+        while (true) {
+            if (!leftFork.inUse && !rightFork.inUse) {
+                leftFork.setInUse(true);
+                rightFork.setInUse(true);
+                synchronized (leftFork) {
+                    synchronized (rightFork) {
+                        System.out.println("Кушает " + name + " вилками:" + leftFork.getForkName() + " и " + rightFork.getForkName());
+                        Thread.sleep(10);
+                    }
+                }
+                break;
+            }
+        }
     }
 
     @Override
     public void run() {
-        eat();
-        think();
+        while (cdl.getCount() > 1) {
+            try {
+                eat();
+                think();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        System.out.println(name + " накушался!");
     }
 }
