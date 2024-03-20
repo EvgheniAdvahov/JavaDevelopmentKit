@@ -29,6 +29,7 @@ public class Main {
 
 
 
+
 //        System.out.println("fork1 "+fork1.isInUse());
 //        System.out.println(fork2.isInUse());
 //        System.out.println(fork3.isInUse());
