@@ -15,6 +15,10 @@ public class Philosoph extends Thread {
         this.rightFork = rightFork;
     }
 
+    public CountDownLatch getCdl() {
+        return cdl;
+    }
+
     public void think() throws InterruptedException {
         synchronized (leftFork) {
             synchronized (rightFork) {
@@ -34,6 +38,7 @@ public class Philosoph extends Thread {
                     synchronized (rightFork) {
                         leftFork.setInUse(true);
                         rightFork.setInUse(true);
+                        Thread.sleep(1000);
                         System.out.println("Кушает " + name + " взял вилку " + leftFork.getForkName() + " и " + rightFork.getForkName());
                         Thread.sleep(1000);
                     }
@@ -45,7 +50,7 @@ public class Philosoph extends Thread {
 
     @Override
     public void run() {
-        while (cdl.getCount() > 1) {
+        while (cdl.getCount() > 0) {
             try {
                 eat();
                 think();

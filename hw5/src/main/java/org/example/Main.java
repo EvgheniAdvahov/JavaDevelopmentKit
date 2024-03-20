@@ -19,12 +19,22 @@ public class Main {
         Philosoph philosoph4 = new Philosoph("Философ N4", fork4, fork3);
         Philosoph philosoph5 = new Philosoph("Философ N5", fork5, fork4);
 
-
+        System.out.println("Кушать подано!");
             philosoph1.start();
             philosoph2.start();
             philosoph3.start();
             philosoph4.start();
             philosoph5.start();
+//            while (
+//                    philosoph1.getCdl().getCount() < 1 &&
+//                    philosoph2.getCdl().getCount() < 1 &&
+//                    philosoph3.getCdl().getCount() < 1 &&
+//                    philosoph4.getCdl().getCount() < 1 &&
+//                    philosoph5.getCdl().getCount() < 1
+//            ){
+
+//            }
+//        System.out.println("ВСЕ философы покушали!!!!");
 
 
 
