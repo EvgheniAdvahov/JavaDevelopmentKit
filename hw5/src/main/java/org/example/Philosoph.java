@@ -6,7 +6,7 @@ public class Philosoph extends Thread {
 
     volatile Fork leftFork;
     volatile Fork rightFork;
-    volatile CountDownLatch cdl = new CountDownLatch(4);
+    CountDownLatch cdl = new CountDownLatch(4);
     private String name;
 
     public Philosoph(String name, Fork leftFork, Fork rightFork) {
@@ -20,15 +20,11 @@ public class Philosoph extends Thread {
     }
 
     public void think() throws InterruptedException {
-        synchronized (leftFork) {
-            synchronized (rightFork) {
                 System.out.println("Покушал " + name + " думает, в тоже время вернул вилку " + leftFork.getForkName() + " и " + rightFork.getForkName());
                 leftFork.setInUse(false);
                 rightFork.setInUse(false);
                 Thread.sleep(1000);
                 cdl.countDown();
-            }
-        }
     }
 
     public void eat() throws InterruptedException {
