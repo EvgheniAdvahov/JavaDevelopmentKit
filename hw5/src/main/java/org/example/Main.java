@@ -32,19 +32,11 @@ public class Main {
                     philosoph4.getCdl().getCount() > 0 ||
                     philosoph5.getCdl().getCount() > 0
             ){
-                Thread.sleep(2000);
+                Thread.sleep(200);
             }
         System.out.println();
         System.out.println("ВСЕ философы покушали!!!!");
 
 
-
-
-
-//        System.out.println("fork1 "+fork1.isInUse());
-//        System.out.println(fork2.isInUse());
-//        System.out.println(fork3.isInUse());
-//        System.out.println(fork4.isInUse());
-//        System.out.println(fork5.isInUse());
     }
 }
