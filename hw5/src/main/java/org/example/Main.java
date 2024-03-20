@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
 
         Fork fork1 = new Fork("1");
@@ -26,13 +26,13 @@ public class Main {
             philosoph4.start();
             philosoph5.start();
 //            while (
-//                    philosoph1.getCdl().getCount() < 1 &&
-//                    philosoph2.getCdl().getCount() < 1 &&
-//                    philosoph3.getCdl().getCount() < 1 &&
-//                    philosoph4.getCdl().getCount() < 1 &&
-//                    philosoph5.getCdl().getCount() < 1
+//                    philosoph1.getCdl().getCount() > 0 &&
+//                    philosoph2.getCdl().getCount() > 0 &&
+//                    philosoph3.getCdl().getCount() > 0 &&
+//                    philosoph4.getCdl().getCount() > 0 &&
+//                    philosoph5.getCdl().getCount() > 0
 //            ){
-
+//                Thread.sleep(2000);
 //            }
 //        System.out.println("ВСЕ философы покушали!!!!");
 
