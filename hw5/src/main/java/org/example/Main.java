@@ -25,16 +25,17 @@ public class Main {
             philosoph3.start();
             philosoph4.start();
             philosoph5.start();
-//            while (
-//                    philosoph1.getCdl().getCount() > 0 &&
-//                    philosoph2.getCdl().getCount() > 0 &&
-//                    philosoph3.getCdl().getCount() > 0 &&
-//                    philosoph4.getCdl().getCount() > 0 &&
-//                    philosoph5.getCdl().getCount() > 0
-//            ){
-//                Thread.sleep(2000);
-//            }
-//        System.out.println("ВСЕ философы покушали!!!!");
+            while (
+                    philosoph1.getCdl().getCount() > 0 ||
+                    philosoph2.getCdl().getCount() > 0 ||
+                    philosoph3.getCdl().getCount() > 0 ||
+                    philosoph4.getCdl().getCount() > 0 ||
+                    philosoph5.getCdl().getCount() > 0
+            ){
+                Thread.sleep(2000);
+            }
+        System.out.println();
+        System.out.println("ВСЕ философы покушали!!!!");
 
 
 
