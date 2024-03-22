@@ -26,7 +26,6 @@ public class App {
         for (int i = 0; i < 1000; i++) {
             winDoor = rnd.nextInt(3);
             playerChoice = rnd.nextInt(3);
-            removeOneDoor(winDoor, playerChoice);
             data.put(i, removeOneDoor(winDoor, playerChoice));
         }
         calculatePercentage(data);
