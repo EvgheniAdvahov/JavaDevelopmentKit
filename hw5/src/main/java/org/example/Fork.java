@@ -2,22 +2,13 @@ package org.example;
 
 public class Fork {
 
-    volatile boolean inUse = false;
-    private String forkName;
+    private boolean using;
 
-    public Fork(String forkName) {
-        this.forkName = forkName;
+    public boolean isUsing() {
+        return using;
     }
 
-    public String getForkName() {
-        return forkName;
-    }
-
-    public boolean isInUse() {
-        return inUse;
-    }
-
-    public void setInUse(boolean inUse) {
-        this.inUse = inUse;
+    public void setUsing(boolean using) {
+        this.using = using;
     }
 }

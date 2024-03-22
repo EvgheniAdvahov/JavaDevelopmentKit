@@ -1,18 +1,26 @@
 package org.example;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 public class Philosoph extends Thread {
 
-    volatile Fork leftFork;
-    volatile Fork rightFork;
-    CountDownLatch cdl = new CountDownLatch(3);
+    private int leftFork;
+    private int rightFork;
+    private int countEat;
+    private Random random;
+    private CountDownLatch cdl;
     private String name;
+    private Table table;
 
-    public Philosoph(String name, Fork leftFork, Fork rightFork) {
+    public Philosoph(String name, Table table, int leftFork, int rightFork, CountDownLatch cdl) {
+        this.table = table;
         this.name = name;
         this.leftFork = leftFork;
         this.rightFork = rightFork;
+        this.cdl = cdl;
+        countEat = 0;
+        random = new Random();
     }
 
     public CountDownLatch getCdl() {
@@ -20,40 +28,28 @@ public class Philosoph extends Thread {
     }
 
     public void think() throws InterruptedException {
-                System.out.println("Покушал " + name + " думает, в тоже время вернул вилку " + leftFork.getForkName() + " и " + rightFork.getForkName());
-                leftFork.setInUse(false);
-                rightFork.setInUse(false);
-//                Thread.sleep(10);
-                cdl.countDown();
+        sleep(random.nextInt(100, 2000));
     }
 
     public void eat() throws InterruptedException {
-        while (true) {
-            if (!leftFork.inUse && !rightFork.inUse) {
-//                synchronized (this){
-                synchronized (leftFork) {
-                    synchronized (rightFork) {
-                        leftFork.setInUse(true);
-                        rightFork.setInUse(true);
-//                        Thread.sleep(1000);
-                        System.out.println("Кушает " + name + " взял вилку " + leftFork.getForkName() + " и " + rightFork.getForkName());
-//                        Thread.sleep(1000);
-                    }
-                }
-                break;
-            }
+        if (table.tryGetForks(leftFork, rightFork)) {
+            System.out.println(name + " Кушает вилками " + leftFork + " и " + rightFork);
+            sleep(random.nextLong(3000, 6000));
+            table.putForks(leftFork, rightFork);
+            System.out.println(name + " покушал, можно и помыслить, не забыв вернуть вилки "
+                    + leftFork + " и " + rightFork);
+            countEat++;
         }
     }
 
     @Override
     public void run() {
-        while (cdl.getCount() > 1) {
+        while (countEat < 3) {
             try {
-                eat();
                 think();
-//                Thread.sleep(1000);
+                eat();
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.fillInStackTrace();
             }
         }
         System.out.println(name + " НАКУШАЛСЯ!!!!! ");
