@@ -1,7 +1,6 @@
 package org.home;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -24,18 +23,13 @@ public class App {
         int playerChoice;
         HashMap<Integer, Boolean> data = new HashMap<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1000; i++) {
             winDoor = rnd.nextInt(3);
             playerChoice = rnd.nextInt(3);
-            removeOneDoor(winDoor,playerChoice);
-            data.put(i,removeOneDoor(winDoor,playerChoice));
+            removeOneDoor(winDoor, playerChoice);
+            data.put(i, removeOneDoor(winDoor, playerChoice));
         }
-
-        System.out.println(data);
-        System.out.println(data.size());
         calculatePercentage(data);
-
-
     }
 
     public static boolean removeOneDoor(int winDoor, int playerChoice) {
@@ -46,17 +40,16 @@ public class App {
         }
     }
 
-    public static void calculatePercentage(HashMap<Integer,Boolean> data){
+    public static void calculatePercentage(HashMap<Integer, Boolean> data) {
         int winValue = 0;
+        double result;
         int size = data.size();
-        for(Boolean value: data.values()) {
-            if (value.equals(true)){
-                System.out.println(value);
-                winValue ++;
+        for (Boolean value : data.values()) {
+            if (value.equals(true)) {
+                winValue++;
             }
         }
-        System.out.println(winValue +" " +  size);
+        result = (double) winValue / size * 100;
+        System.out.println("correct answers: " + winValue + "\npercentage: " + Math.round(result) + "%");
     }
-
-
 }

@@ -30,13 +30,14 @@ public class Philosoph extends Thread {
     public void eat() throws InterruptedException {
         while (true) {
             if (!leftFork.inUse && !rightFork.inUse) {
+//                synchronized (this){
                 synchronized (leftFork) {
                     synchronized (rightFork) {
                         leftFork.setInUse(true);
                         rightFork.setInUse(true);
-                        Thread.sleep(1000);
+//                        Thread.sleep(1000);
                         System.out.println("Кушает " + name + " взял вилку " + leftFork.getForkName() + " и " + rightFork.getForkName());
-                        Thread.sleep(1000);
+//                        Thread.sleep(1000);
                     }
                 }
                 break;
@@ -50,7 +51,7 @@ public class Philosoph extends Thread {
             try {
                 eat();
                 think();
-                Thread.sleep(1000);
+//                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
